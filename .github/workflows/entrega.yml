@@ -1,0 +1,24 @@
+name: entrega
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - name: Testes da loja
+        run: dotnet test LojaProducao.slnx -c Release --verbosity quiet
+
+  # LAB-002 e LAB-003: adicionar publish, dependente de tests.
+  # O workflow atual executa testes, mas ainda NAO publica imagens.
+  # Consulte README e a branch gabarito do template original.
